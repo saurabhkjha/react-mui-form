@@ -7,7 +7,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import Typography from '@mui/material/Typography';
+import { Grid } from '@mui/material';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -20,12 +23,20 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export interface DialogTitleProps {
   id: string;
+  fullScreen: boolean;
   children?: React.ReactNode;
+  onClose: () => void;
+  onFullScreen: () => void;
+}
+
+export interface SearchPopupProps {
+  mode: boolean;
+  title: string;
   onClose: () => void;
 }
 
 const BootstrapDialogTitle = (props: DialogTitleProps) => {
-  const { children, onClose, ...other } = props;
+  const { children, onClose, onFullScreen, fullScreen, ...other } = props;
 
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -44,20 +55,40 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
           <CloseIcon />
         </IconButton>
       ) : null}
+      {onFullScreen ? (
+        <IconButton
+          aria-label="close"
+          onClick={onFullScreen}
+          sx={{
+            position: 'absolute',
+            right: 40,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          {fullScreen ? <CloseFullscreenIcon /> : <OpenInFullIcon />}
+        </IconButton>
+      ) : null}
     </DialogTitle>
   );
 };
 
-export default function SearchPopup(props) {
+export default function SearchPopup(props: SearchPopupProps) {
+  const { mode, title, onClose } = props;
   const [open, setOpen] = React.useState(false);
+  const [fullScreen, setFullScreen] = React.useState(false);
 
   React.useEffect(() => {
-    setOpen(props.open);
-  }, [props.open]);
+    setOpen(mode);
+  }, [mode]);
 
   const handleClose = () => {
     setOpen(false);
-    props.onClose();
+    onClose();
+  };
+
+  const handleFullScreen = () => {
+    setFullScreen((prev) => !prev);
   };
 
   return (
@@ -66,33 +97,39 @@ export default function SearchPopup(props) {
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        fullScreen={fullScreen}
+        maxWidth="md"
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
           onClose={handleClose}
+          onFullScreen={handleFullScreen}
+          fullScreen={fullScreen}
         >
-          Modal title
+          {title}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-            Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-            auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-            dui. Donec ullamcorper nulla non metus auctor fringilla.
-          </Typography>
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <Typography gutterBottom>
+                Cras mattis consectetur purus sit amet fermentum. Cras justo
+                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                risus, porta ac consectetur ac, vestibulum at eros.
+              </Typography>
+            </Grid>
+            <Grid item md={6}>
+              <Typography gutterBottom>
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur
+                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
+                dolor auctor.
+              </Typography>
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
+          <Button variant="contained">Apply</Button>
+          <Button variant="outlined" onClick={handleClose}>
+            Cancel
           </Button>
         </DialogActions>
       </BootstrapDialog>

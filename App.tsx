@@ -42,13 +42,13 @@ export default function App() {
   const theme = useTheme();
   const isMobileBrkPt = useMediaQuery(theme.breakpoints.down('md'));
 
-  const [searchPopupOpen, setSearchPopupOpen] = React.useState(false);
+  const [searchPopupOpen, setSearchPopupOpen] = React.useState(true);
 
   const handleSearchPopup = (type) => {
     setSearchPopupOpen(true);
   };
 
-  const searchPopupClose = (type) => {
+  const searchPopupClose = () => {
     setSearchPopupOpen(false);
   };
 
@@ -238,7 +238,11 @@ export default function App() {
           </Grid>
         </Box>
       </Item>
-      <SearchPopup open={searchPopupOpen} onClose={searchPopupClose} />
+      <SearchPopup
+        mode={searchPopupOpen}
+        onClose={searchPopupClose}
+        title="Tenants"
+      />
     </div>
   );
 }
