@@ -1,6 +1,10 @@
 import {
   Box,
+  Button,
+  Checkbox,
   FormControl,
+  FormControlLabel,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
@@ -86,11 +90,11 @@ export default function App() {
             <Grid item xs={12} md={6}>
               <Item>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
+                  <InputLabel id="business-area-label">
                     Business Area*
                   </InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
+                    labelId="business-area-label"
                     id="business-area"
                     label="Business Area"
                   >
@@ -104,11 +108,9 @@ export default function App() {
             <Grid item xs={12} md={6}>
               <Item>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    PageOut Type*
-                  </InputLabel>
+                  <InputLabel id="pageout-type-label">PageOut Type*</InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
+                    labelId="pageout-type-label"
                     id="pageout-type"
                     label="PageOut Type"
                   >
@@ -116,6 +118,107 @@ export default function App() {
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                   </Select>
+                  <FormHelperText>
+                    Please change when sending updated Pageout type
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <InputLabel id="priority-label">Priority*</InputLabel>
+                  <Select
+                    labelId="priority-label"
+                    id="pageout-type"
+                    label="Priority"
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                  <FormHelperText>
+                    Level of priority this issue is being driven at
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label="Reclassify"
+                  />
+                  <FormHelperText>Reclassify incident priority</FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Item>
+                <InputLabel id="tenats-label">Tenants</InputLabel>
+                <Button variant="outlined">Add Values</Button>
+                <FormHelperText>
+                  Tenant, market impacted *TEST TENANT* used for mock drills and
+                  test validation
+                </FormHelperText>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Email Description"
+                    multiline
+                    rows={4}
+                  />
+                  <FormHelperText>
+                    Briefly describe the issue being experienced. Please do not
+                    include the priority level in the field
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Start Impact"
+                  />
+                  <FormHelperText>
+                  YYYY-MM-DD HH:MM:SS
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Item>
+                <InputLabel id="responder-label">Responders</InputLabel>
+                <Button variant="outlined">Add Values</Button>
+                <FormHelperText>
+                  Tenant, market impacted *TEST TENANT* used for mock drills and
+                  test validation
+                </FormHelperText>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <InputLabel id="ccc-manager-label">CCC Manager*</InputLabel>
+                  <Select
+                    labelId="ccc-manager-label"
+                    id="ccc-manager-type"
+                    label="CCC Manager*"
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                  <FormHelperText>
+                    Manager on call
+                  </FormHelperText>
                 </FormControl>
               </Item>
             </Grid>
