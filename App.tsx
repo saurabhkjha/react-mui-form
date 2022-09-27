@@ -20,6 +20,8 @@ import {
 import * as React from 'react';
 import './style.css';
 
+import SearchPopup from './components/searchPopup';
+
 const Container = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   color: theme.palette.text.secondary,
@@ -39,6 +41,16 @@ export const FormContext = React.createContext({});
 export default function App() {
   const theme = useTheme();
   const isMobileBrkPt = useMediaQuery(theme.breakpoints.down('md'));
+
+  const [searchPopupOpen, setSearchPopupOpen] = React.useState(false);
+
+  const handleSearchPopup = (type) => {
+    setSearchPopupOpen(true);
+  };
+
+  const searchPopupClose = (type) => {
+    setSearchPopupOpen(false);
+  };
 
   return (
     <div>
@@ -157,7 +169,12 @@ export default function App() {
             <Grid item xs={12} md={12}>
               <Item>
                 <InputLabel id="tenats-label">Tenants</InputLabel>
-                <Button variant="outlined">Add Values</Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSearchPopup('tenants')}
+                >
+                  Add Values
+                </Button>
                 <FormHelperText>
                   Tenant, market impacted *TEST TENANT* used for mock drills and
                   test validation
@@ -187,9 +204,7 @@ export default function App() {
                     id="outlined-multiline-static"
                     label="Start Impact"
                   />
-                  <FormHelperText>
-                  YYYY-MM-DD HH:MM:SS
-                  </FormHelperText>
+                  <FormHelperText>YYYY-MM-DD HH:MM:SS</FormHelperText>
                 </FormControl>
               </Item>
             </Grid>
@@ -216,15 +231,14 @@ export default function App() {
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                   </Select>
-                  <FormHelperText>
-                    Manager on call
-                  </FormHelperText>
+                  <FormHelperText>Manager on call</FormHelperText>
                 </FormControl>
               </Item>
             </Grid>
           </Grid>
         </Box>
       </Item>
+      <SearchPopup open={searchPopupOpen} onClose={searchPopupClose} />
     </div>
   );
 }
