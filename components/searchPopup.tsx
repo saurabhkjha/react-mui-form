@@ -10,15 +10,23 @@ import CloseIcon from '@mui/icons-material/Close';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material';
+import { Grid, Paper, Stack } from '@mui/material';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
+    paddingLeft: 0,
+    paddingRight: 0,
   },
   '& .MuiDialogActions-root': {
     padding: theme.spacing(1),
   },
+}));
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  paddingLeft: theme.spacing(2),
+  color: theme.palette.text.secondary,
+  boxShadow: 'none',
 }));
 
 export interface DialogTitleProps {
@@ -109,15 +117,45 @@ export default function SearchPopup(props: SearchPopupProps) {
           {title}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={2}
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="top"
+          >
             <Grid item md={6}>
-              <Typography gutterBottom>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </Typography>
+              <Stack spacing={2}>
+                <Typography
+                  gutterBottom
+                  sx={{
+                    flex: '1 1 100%',
+                    background: '#D3D3D3',
+                    color: '#A9A9A9',
+                    fontWeight: 'bold',
+                    fontSize: '1em',
+                    paddingX: '1em',
+                    paddingY: '.5em',
+                  }}
+                >
+                  AVAILABLE
+                </Typography>
+                <Item>Item 1</Item>
+                <Item>Item 2</Item>
+                <Item>Item 3</Item>
+              </Stack>
             </Grid>
-            <Grid item md={6}>
+
+            <Grid
+              item
+              md={6}
+              style={{
+                paddingLeft: '10px',
+                borderStyle: 'solid',
+                borderColor: 'rgba(0, 0, 0, 0.12)',
+                borderWidth: '0 0 0 1px',
+              }}
+            >
               <Typography gutterBottom>
                 Praesent commodo cursus magna, vel scelerisque nisl consectetur
                 et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
