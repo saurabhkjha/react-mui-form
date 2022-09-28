@@ -42,7 +42,7 @@ export default function App() {
   const theme = useTheme();
   const isMobileBrkPt = useMediaQuery(theme.breakpoints.down('md'));
 
-  const [searchPopupOpen, setSearchPopupOpen] = React.useState(true);
+  const [searchPopupOpen, setSearchPopupOpen] = React.useState(false);
 
   const handleSearchPopup = (type) => {
     setSearchPopupOpen(true);
@@ -70,7 +70,7 @@ export default function App() {
           alignItems="center"
           sx={{
             background: 'white',
-            position: 'sticky',
+            position: 'relative',
             top: 60,
             bottom: 60,
             padding: '10px 20px',
@@ -233,6 +233,231 @@ export default function App() {
                   </Select>
                   <FormHelperText>Manager on call</FormHelperText>
                 </FormControl>
+              </Item>
+            </Grid>
+          </Grid>
+        </Box>
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="space-between"
+          alignContent="center"
+          alignItems="center"
+          sx={{
+            background: 'white',
+            position: 'relative',
+            top: 60,
+            bottom: 60,
+            padding: '10px 20px',
+            zIndex: 5,
+          }}
+        >
+          <Typography
+            sx={{
+              flex: '1 1 100%',
+              color: 'rgba(0, 0, 0, 0.87)',
+              fontWeight: '600',
+              fontSize: { md: '1.5em', xs: '1.25em' },
+              borderBottom: '1px solid grey',
+            }}
+            component="div"
+          >
+            Enter Valid INC, Slack, Zoom or leave blank to create
+          </Typography>
+        </Stack>
+        <Box
+          sx={{
+            flexGrow: 1,
+            background: '#fff',
+            padding: '0 1em 1em 1em',
+            marginTop: '4em',
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Incident Number"
+                  />
+                  <FormHelperText>
+                    Please provide valid ServiceNOw INC or Leave blank to create
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Channel ID"
+                  />
+                  <FormHelperText>
+                    Provide channel name is exists - Leave blank to create
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField id="outlined-multiline-static" label="Zoom" />
+                  <FormHelperText>
+                    URL for zoom join - Leave blank to create
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+          </Grid>
+        </Box>
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="space-between"
+          alignContent="center"
+          alignItems="center"
+          sx={{
+            background: 'white',
+            position: 'relative',
+            top: 60,
+            bottom: 60,
+            padding: '10px 20px',
+            zIndex: 5,
+          }}
+        >
+          <Typography
+            sx={{
+              flex: '1 1 100%',
+              color: 'rgba(0, 0, 0, 0.87)',
+              fontWeight: '600',
+              fontSize: { md: '1.5em', xs: '1.25em' },
+              borderBottom: '1px solid grey',
+            }}
+            component="div"
+          >
+            Common
+          </Typography>
+        </Stack>
+        <Box
+          sx={{
+            flexGrow: 1,
+            background: '#fff',
+            padding: '0 1em 1em 1em',
+            marginTop: '4em',
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Impact"
+                    multiline
+                    rows={4}
+                  />
+                  <FormHelperText>
+                    What impact our associates, customer, or suppliers are
+                    seeing
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Status"
+                    multiline
+                    rows={4}
+                  />
+                  <FormHelperText>Current incident status</FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Action Items"
+                    multiline
+                    rows={4}
+                  />
+                  <FormHelperText>
+                    Field for logging actions taken in the course of
+                    troubleshooting the issue
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Issue Owner"
+                  />
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Directors Statement"
+                    multiline
+                    rows={4}
+                  />
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <InputLabel id="issue-detection-label">
+                    Issue Detection Method
+                  </InputLabel>
+                  <Select
+                    labelId="issue-detection-label"
+                    id="issue-detection-type"
+                    label="Issue Detection Method"
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Teams Engaged"
+                    multiline
+                    rows={4}
+                  />
+                  <FormHelperText>
+                    Field for listing team engaged on the issue
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Next Update"
+                  />
+                </FormControl>
+                <FormHelperText>Next Update</FormHelperText>
               </Item>
             </Grid>
           </Grid>
