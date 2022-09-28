@@ -590,6 +590,112 @@ export default function App() {
             </Grid>
           </Grid>
         </Box>
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="space-between"
+          alignContent="center"
+          alignItems="center"
+          sx={{
+            background: 'white',
+            position: 'relative',
+            top: 60,
+            bottom: 60,
+            padding: '10px 20px',
+            zIndex: 5,
+          }}
+        >
+          <Typography
+            sx={{
+              flex: '1 1 100%',
+              color: 'rgba(0, 0, 0, 0.87)',
+              fontWeight: '600',
+              fontSize: { md: '1.5em', xs: '1.25em' },
+              borderBottom: '1px solid grey',
+            }}
+            component="div"
+          >
+            Resolution Properties - Please remember to enter and impact time
+            when sending RESOLVED
+          </Typography>
+        </Stack>
+        <Box
+          sx={{
+            flexGrow: 1,
+            background: '#fff',
+            padding: '0 1em 1em 1em',
+            marginTop: '4em',
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Root Cause"
+                    multiline
+                    rows={4}
+                  />
+                  <FormHelperText>
+                    If known, please specify waht is belived to be the root
+                    cause of this issue, Otherwise, leave it as "TBD"
+                  </FormHelperText>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="End Impact"
+                  />
+                </FormControl>
+              </Item>
+            </Grid>
+          </Grid>
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent="space-between"
+            alignContent="center"
+            alignItems="center"
+            sx={{
+              background: 'white',
+              position: 'relative',
+              top: 60,
+              bottom: 60,
+              padding: '10px 20px',
+              zIndex: 5,
+            }}
+          >
+            <Typography
+              sx={{
+                flex: '1 1 100%',
+                color: 'rgba(0, 0, 0, 0.87)',
+                fontWeight: '600',
+                fontSize: { md: '1.5em', xs: '1.25em' },
+                borderBottom: '1px solid grey',
+              }}
+              component="div"
+            >
+              !!!!!!!!!!!!!!!!!! PLEASE CHECK BEFORE SENDING !!!!!!!!!!!!!!!!!!
+            </Typography>
+          </Stack>
+        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Item>
+              <FormControl fullWidth>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="Check To Send Notification*"
+                />
+              </FormControl>
+            </Item>
+          </Grid>
+        </Grid>
       </Item>
       <SearchPopup
         mode={searchPopupOpen}
