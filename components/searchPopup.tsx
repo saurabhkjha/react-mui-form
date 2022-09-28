@@ -8,16 +8,21 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import Typography from '@mui/material/Typography';
 import {
+  Box,
   Checkbox,
   FormControl,
   FormControlLabel,
   FormGroup,
   Grid,
   InputBase,
+  List,
+  ListItem,
+  ListItemText,
   OutlinedInput,
   Paper,
   Stack,
@@ -104,7 +109,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
   );
 };
 
-const AvailableList = ({ name }) => {
+const AvailableList = ({ name, checked, handleSelection }) => {
   return (
     <Paper
       component="form"
@@ -118,10 +123,42 @@ const AvailableList = ({ name }) => {
     >
       <Item>
         <FormGroup>
-          <FormControlLabel control={<Checkbox />} label={name} />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checked}
+                onChange={() => handleSelection(name)}
+              />
+            }
+            label={name}
+          />
         </FormGroup>
       </Item>
     </Paper>
+  );
+};
+
+const SelectedList = ({ items, removeSelected }) => {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <List>
+        {items.map((item) => (
+          <ListItem
+            secondaryAction={
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => removeSelected(item)}
+              >
+                <ClearIcon />
+              </IconButton>
+            }
+          >
+            <ListItemText primary={item} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
 };
 
@@ -129,10 +166,21 @@ export default function SearchPopup(props: SearchPopupProps) {
   const { mode, title, onClose } = props;
   const [open, setOpen] = React.useState(false);
   const [fullScreen, setFullScreen] = React.useState(false);
+  const [selected, setSelected] = React.useState([]);
+  const [all, setAll] = React.useState(false);
 
   React.useEffect(() => {
     setOpen(mode);
   }, [mode]);
+
+  React.useEffect(() => {
+    // tenants is hard coded  later from props
+    if (selected.length === tenants.length) {
+      setAll(true);
+    } else {
+      setAll(false);
+    }
+  }, [selected]);
 
   const handleClose = () => {
     setOpen(false);
@@ -141,6 +189,21 @@ export default function SearchPopup(props: SearchPopupProps) {
 
   const handleFullScreen = () => {
     setFullScreen((prev) => !prev);
+  };
+
+  const handleSelection = (tanent) => {
+    setSelected([...selected, tanent]);
+  };
+
+  const removeSelected = (item) => {
+    console.log(item);
+    setSelected((prev) => prev.filter((p) => p !== item));
+  };
+
+  const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.checked);
+    const sel = event.target.checked ? tenants : [];
+    setSelected(sel);
   };
 
   return (
@@ -196,7 +259,7 @@ export default function SearchPopup(props: SearchPopupProps) {
                     borderBottom: '1px solid #D3D3D3',
                   }}
                 >
-                  <Checkbox />
+                  <Checkbox checked={all} onClick={selectAll} />
                   <OutlinedInput
                     startAdornment={
                       <IconButton>
@@ -213,7 +276,11 @@ export default function SearchPopup(props: SearchPopupProps) {
                   />
                 </Paper>
                 {tenants.map((tenant) => (
-                  <AvailableList name={tenant} />
+                  <AvailableList
+                    handleSelection={handleSelection}
+                    name={tenant}
+                    checked={selected.indexOf(tenant) > -1}
+                  />
                 ))}
               </Stack>
             </Grid>
@@ -242,9 +309,10 @@ export default function SearchPopup(props: SearchPopupProps) {
                   SELECTED
                 </Typography>
 
-                <Item>Item 1Item 1Item 1Item 1Item 1Item 1Item 1</Item>
-                <Item>Item 2</Item>
-                <Item>Item 3</Item>
+                <SelectedList
+                  items={selected}
+                  removeSelected={removeSelected}
+                />
               </Stack>
             </Grid>
           </Grid>
