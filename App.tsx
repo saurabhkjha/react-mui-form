@@ -462,6 +462,134 @@ export default function App() {
             </Grid>
           </Grid>
         </Box>
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="space-between"
+          alignContent="center"
+          alignItems="center"
+          sx={{
+            background: 'white',
+            position: 'relative',
+            top: 60,
+            bottom: 60,
+            padding: '10px 20px',
+            zIndex: 5,
+          }}
+        >
+          <Typography
+            sx={{
+              flex: '1 1 100%',
+              color: 'rgba(0, 0, 0, 0.87)',
+              fontWeight: '600',
+              fontSize: { md: '1.5em', xs: '1.25em' },
+              borderBottom: '1px solid grey',
+            }}
+            component="div"
+          >
+            Store, Club & Logistics
+          </Typography>
+        </Stack>
+        <Box
+          sx={{
+            flexGrow: 1,
+            background: '#fff',
+            padding: '0 1em 1em 1em',
+            marginTop: '4em',
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={12}>
+              <Item>
+                <InputLabel id="tenats-label">Tenants</InputLabel>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSearchPopup('tenants')}
+                >
+                  Country
+                </Button>
+                <FormHelperText>
+                  (Select one or more) Country code
+                </FormHelperText>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Item>
+                <InputLabel id="tenats-label">Tenants</InputLabel>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSearchPopup('tenants')}
+                >
+                  Focus
+                </Button>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Site ID/Box ID"
+                  />
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <InputLabel id="vendor-caused-label">
+                    Vendor caused?
+                  </InputLabel>
+                  <Select
+                    labelId="vendor-caused-label"
+                    id="vendor-caused-type"
+                    label="Vendor caused?"
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <InputLabel id="issue-detection-label">HelpDesk</InputLabel>
+                  <Select
+                    labelId="issue-detection-label"
+                    id="issue-detection-type"
+                    label="Issue Detection Method"
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Total Time of Outage"
+                  />
+                </FormControl>
+              </Item>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Item>
+                <FormControl fullWidth>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Confirm Impact"
+                  />
+                </FormControl>
+              </Item>
+            </Grid>
+          </Grid>
+        </Box>
       </Item>
       <SearchPopup
         mode={searchPopupOpen}
