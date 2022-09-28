@@ -59,7 +59,7 @@ export interface SearchPopupProps {
   onClose: () => void;
 }
 
-const tenants = [
+const Faketenants = [
   'Homeoffice',
   'GEC',
   'Global',
@@ -164,6 +164,7 @@ const SelectedList = ({ items, removeSelected }) => {
 
 export default function SearchPopup(props: SearchPopupProps) {
   const { mode, title, onClose } = props;
+  const [tenants, setTenants] = React.useState(Faketenants);
   const [open, setOpen] = React.useState(false);
   const [fullScreen, setFullScreen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
@@ -201,9 +202,18 @@ export default function SearchPopup(props: SearchPopupProps) {
   };
 
   const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.checked);
     const sel = event.target.checked ? tenants : [];
     setSelected(sel);
+  };
+
+  const filterItem = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    // replace Faketenants with props value
+    setTenants(
+      Faketenants.filter(
+        (f) => f.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1
+      )
+    );
   };
 
   return (
@@ -261,6 +271,7 @@ export default function SearchPopup(props: SearchPopupProps) {
                 >
                   <Checkbox checked={all} onClick={selectAll} />
                   <OutlinedInput
+                    onChange={filterItem}
                     startAdornment={
                       <IconButton>
                         <SearchIcon />
